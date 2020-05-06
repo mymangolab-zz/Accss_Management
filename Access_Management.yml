@@ -1,0 +1,7 @@
+---
+- name: Access Management
+  hosts: lab
+  gather_facts: no
+  become: yes
+  roles:
+    - roles/Access_Management

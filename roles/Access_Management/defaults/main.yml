@@ -1,0 +1,22 @@
+---
+# defaults file for roles/Access_Management
+########### Groups ###########
+groups_to_create:
+  - name: AppTeam
+  - name: AdminTeam
+  - name: DevTeam
+
+# - [ 'AppTeam', 'AdminTeam', 'DevTeam' ]
+
+########### Groups ###########
+#
+########### Users ###########
+users_to_create:
+  - name: user1
+    comment: "App User" 
+  - name: user2
+    comment: "Admin User"
+  - name: user3
+    comment: "Dev User"
+########### Users ###########
+#

@@ -1,0 +1,28 @@
+---
+# tasks file for roles/Access_Management
+- name: Collect Group Database
+  getent:
+    database: group
+  tags: ["users", "groups", "configuration"]
+
+- name: Creating groups  
+  group:
+    name: "{{ item.name }}"
+  with_items: "{{ groups_to_create }}"
+  when: item.name not in ansible_facts.getent_group
+  tags: ["users", "groups", "configuration"]
+
+- name: Collect User Database
+  getent:
+    database: passwd
+  tags: ["users", "groups", "configuration"]
+
+- name: Creating Users
+  user:
+    name: "{{ item.name }}"
+    create_home : yes
+    password: "$6$mysecretsalt$4ud8VgmqflazW/YjYGXg/Y94RH8o3nuSJqYY/OUknbl6ep08odgNgOzq.LeWDyGpvP8VdChTmtnwdavG3e/JU."
+    comment: "{{ item.comment if item.comment is defined else '' }}"
+  with_items: "{{ users_to_create }}"
+  when: item.name not in ansible_facts.getent_passwd
+  tags: ["users", "groups", "configuration"]
